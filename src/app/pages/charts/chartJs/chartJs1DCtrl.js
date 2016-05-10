@@ -9,7 +9,24 @@
     .controller('chartJs1DCtrl', chartJs1DCtrl);
 
   /** @ngInject */
-  function chartJs1DCtrl($scope) {
+  function chartJs1DCtrl($scope, $http) {
+
+    /*var url = "https://news-visualization-be.herokuapp.com/news-visualization/api/statistics/by-category?from=2016-01-01&to=2016-01-20&category=Deportes";
+    d3.json(url, function(error, data) {
+      var a = data;
+      console.log(data);
+    });*/
+
+    $http({
+      url: "http://localhost:4000/api/by-category?from=2016-01-01&to=2016-01-20&category=Deportes",
+      method: 'GET'
+    }).success(function(data) {
+          var a = data;
+          console.log(data);
+        })
+        .error(function(data){
+          console.log("Holis");
+        });
 
     $scope.labels =["Sleeping", "Designing", "Coding", "Cycling"];
     $scope.data = [20, 40, 5, 35];
